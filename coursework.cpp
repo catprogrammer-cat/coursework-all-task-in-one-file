@@ -1,7 +1,7 @@
 
 #include <iostream>
 
-int max_value_matrix(int size){ //coursework_1 --> // Вычислить значение максимального 
+int max_value_matrix(int size){ //coursework_1_1 --> // Вычислить значение максимального 
     int max;                                       // элемента главной диагонали матрицы.
     // Create array2d
     int **array2d = new int * [size];
@@ -38,7 +38,7 @@ int max_value_matrix(int size){ //coursework_1 --> // Вычислить зна�
     return max;
 }
 
-int counter_positive_element_rows_array2d(int x,int y){ //coursework_2 --> // Вычислить элементы вектора как количества 
+int counter_positive_element_rows_array2d(int x,int y){ //coursework_1_2 --> // Вычислить элементы вектора как количества 
     int **array2d = new int * [y];                                                  // положительных элементов строк матрицы.
     for(int i = 0;i<size;i++){
         array2d[i] = new int [x];
@@ -73,7 +73,7 @@ int counter_positive_element_rows_array2d(int x,int y){ //coursework_2 --> // В
     return array1d;
 }
 
-int sum_positive_elements_column_array2d(int x,int y){ //coursework_3 --> // Определить: сумму элементов в тех столбцах, 
+int sum_positive_elements_column_array2d(int x,int y){ //coursework_1_3 --> // Определить: сумму элементов в тех столбцах, 
     //create matrix                                                       // которые не содержат отрицательных элементов;
     int **array2d = new int * [y];
     for(int i = 0;i<y;i++){
@@ -112,8 +112,8 @@ int sum_positive_elements_column_array2d(int x,int y){ //coursework_3 --> // О�
     return array1d;
 }
 
-int find_max_element_of_diagonals_array2d(int size){ //coursework_4 --> //Найти минимум среди сумм модулей элементов диагоналей,
-    //create matrix                                                     // параллельных побочной диагонали матрицы.
+int find_max_element_of_diagonals_array2d(int size){ //coursework_1_4 --> // Найти минимум среди сумм модулей элементов диагоналей,
+    //create matrix                                                       // параллельных побочной диагонали матрицы.
     int **array2d = new int * [size];
     for(int i = 0;i<size;i++){
         array2d[i] = new int [size];
@@ -171,6 +171,39 @@ int find_max_element_of_diagonals_array2d(int size){ //coursework_4 --> //Най
     //delete [] array1d;
     return min;
 }
+
+    
+int* transfer_array2d_array1d(int size_x,int size_y){ // coursework_2_1 --> // Создать одномерный массив из элементов матрицы.
+    //create matrix                                   // v_1
+    int **array2d = new int * [size_y];
+    for(int i = 0;i<size_x;i++){
+        array2d[i] = new int [size_x];
+    }
+    //create array
+    int *array1d = new int[size_x*size_y]; 
+    // fill matrix
+    srand ( time(0) );
+    for(int i = 0; i<size_x;i++){
+        for(int j = 0;j<size_y;j++){
+            array2d[i][j] = (rand() % 100);
+        }
+    }
+    // transfer 'array2d' to 'array1d'
+    int index=0;
+    for(int i=0;i<size_x;i++)
+        for(int j=0;j<size_y; j++,index++)
+            array1d[index] = array2d[i][j];
+    // delete matrix
+    for(int i = 0;i<size_x;i++){
+        delete[] array2d[i];
+    }
+    delete[] array2d;
+    // //delete array1d
+    // delete[] array1d;
+    return array1d;
+}
+
+
 
 
 
