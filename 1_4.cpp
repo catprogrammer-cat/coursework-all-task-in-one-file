@@ -1,13 +1,15 @@
 // Найти минимум среди сумм модулей элементов диагоналей,
 // параллельных побочной диагонали матрицы.
+
 #include <iostream>
 
 using namespace std;
 
+ 
+
 int main()
 {
-    int size = 12;
-    int max;
+    int size = 3;
     //create matrix
     int **array2d = new int * [size];
     for(int i = 0;i<size;i++){
@@ -92,8 +94,25 @@ int main()
     for(int i = 0; i < quantity_a + quantity_b; i++) {
         cout << "[" << array1d[i] << "]";
     }
+    int min = array1d[0];
+    int index = 0;
+    for(int i = 0; i < quantity_a + quantity_b; i++) {
+        if(array1d[i] < min){
+            min = array1d[i];
+            
+        }
+    }
+    for(int i = 0; i < quantity_a + quantity_b; i++){
+        if(array1d[i] == min){
+            break;
+        }
+        else{
+            index++;
+        }
+    }
     
-    
+    cout << "\nmax element: " << min;
+    cout << "\nindex max element: " << index;
     
     //delete matrix
     for(int i = 0;i<size;i++){
