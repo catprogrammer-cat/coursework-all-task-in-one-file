@@ -38,7 +38,7 @@ int main()
         }
         cout << ";" << endl;
     }
-    // calculating matrix
+    // calculating array1d
     for(int i=0,j=0; i<size,j<size; i++,j++){
         array1d[i] = array2d[i][j];
     }
