@@ -110,7 +110,6 @@ int sum_positive_elements_column_array2d(int x,int y){ //coursework_3 --> // ĞĞ
     //delete array1d
     delete[] array1d;
     return array1d;
-    
 } 
 using namespace std;
 
