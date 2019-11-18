@@ -110,7 +110,70 @@ int sum_positive_elements_column_array2d(int x,int y){ //coursework_3 --> // О�
     //delete array1d
     delete[] array1d;
     return array1d;
-} 
+}
+
+int find_max_element_of_diagonals_array2d(int size){ //coursework_4 --> //Найти минимум среди сумм модулей элементов диагоналей,
+    //create matrix                                                     // параллельных побочной диагонали матрицы.
+    int **array2d = new int * [size];
+    for(int i = 0;i<size;i++){
+        array2d[i] = new int [size];
+    }    
+    //create array
+    int *array1d = new int[size]; 
+    // fill matrix
+    srand ( time(0) );
+    for(int i = 0; i<size;i++){
+        for(int j = 0;j<size;j++){
+            array2d[i][j] = (rand() % 10);
+        }
+    }
+    // fill array1d of sum of diagonals
+    ///////////////////////////////////////////////////
+    int sum = 0;
+    int calculation = 0;
+    // Calculate quantity of first part of diagonals(with middle diagonal)
+    // and second part of diagonals(withoit middle diagonal)
+    int quantity_a = size - 1;
+    int quantity_b = size - 2;
+    for(int num = 0; num<quantity_a; num++){
+        calculation = num - (size - 2); //size = 6 --> 4 ?? size = 5 --> 
+        sum = 0;
+        for(int i = 0;i<size-abs(calculation);i++){
+            sum += abs(array2d[i][size-1-i+calculation]);
+        }
+    array1d[num] = sum;
+    }
+    for(int num = 0; num<quantity_b; num++){
+        calculation = num - (size - 2); // 0 - (-3); ?? 1 - (-2)
+        sum = 0;
+        for(int i = quantity_a;i>=0+abs(calculation);i--){
+            sum += abs(array2d[i][abs(size-1-i-calculation)]);
+        }
+    int minus = size-4;  
+    array1d[(size+minus)-num] = sum;
+    
+    }
+    ///////////////////////////////////////////////////
+    // calculate min element
+    int min = array1d[0];
+    // int index = 0;
+    for(int i = 0; i < quantity_a + quantity_b; i++) {
+        if(array1d[i] < min){
+            min = array1d[i];
+        }
+    }
+    //delete matrix
+    for(int i = 0;i<size;i++){
+         delete[] array2d[i];
+     }
+    delete[] array2d;
+    //delete array1d
+    //delete [] array1d;
+    return min;
+}
+
+
+
 using namespace std;
 
 int main()
