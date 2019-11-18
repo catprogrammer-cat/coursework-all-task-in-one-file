@@ -4,7 +4,6 @@ using namespace std;
 
 int main()
 {
-    srand ( time(0) );
     int size = 2;
     int max;
     //create matrix
@@ -18,6 +17,7 @@ int main()
     
     
     // fill matrix
+    srand ( time(0) );
     for(int i = 0; i<size;i++){
         for(int j = 0;j<size;j++){
             array2d[i][j] = (rand() % 100);
