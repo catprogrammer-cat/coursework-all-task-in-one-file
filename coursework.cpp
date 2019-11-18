@@ -38,7 +38,7 @@ int max_value_matrix(int size){ //coursework_1 --> // Вычислить зна�
     return max;
 }
 
-int counter_positive_element_rows_array2d(int size,int x,int y){ //coursework_2 --> // Вычислить элементы вектора как количества 
+int counter_positive_element_rows_array2d(int x,int y){ //coursework_2 --> // Вычислить элементы вектора как количества 
     int **array2d = new int * [y];                                                  // положительных элементов строк матрицы.
     for(int i = 0;i<size;i++){
         array2d[i] = new int [x];
