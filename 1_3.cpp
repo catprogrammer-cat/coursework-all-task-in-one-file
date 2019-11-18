@@ -1,14 +1,32 @@
 // Определить: сумму элементов в тех столбцах, 
 // которые не содержат отрицательных элементов;
+
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
+    srand ( time(0) );
+    int x = 10;
+    int y = 5;
+    //create matrix
+    int **array2d = new int * [y];
+    for(int i = 0;i<y;i++){
+        array2d[i] = new int [x];
+    }
+    //create array
+    int *array1d = new int[x]; 
     
-    int x = 15;
-    int y = 3;
+    
+    
+    // fill matrix
+    for(int i = 0; i<y;i++){
+        for(int j = 0;j<x;j++){
+            array2d[i][j] = (rand() % 20)-10;
+        }
+    }
+    
     
     // output matrix 
     for(int i = 0; i<y;i++){
@@ -24,8 +42,21 @@ int main()
         cout << ";" << endl;
     }
     /////////
-
-    
+    // Calcultation
+    for(int i=0;i<y;i++){
+        array1d[i] = 0;
+        for(int j=0;j<x;j++){
+            
+            if(array2d[j][i] < 0){
+                array1d[i] = 0;
+                break;
+            }
+            else{
+                array1d[i]+=array2d[j][i];
+            }
+         
+        }
+    }
 
     /////////
     for(int i=0;i<x;i++){
