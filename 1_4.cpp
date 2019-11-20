@@ -114,7 +114,7 @@ int main()
     }
     
     cout << "\nmin element: " << min;
-    cout << "\nindex max element: " << index;
+    cout << "\nindex max element: " << index << endl;
     
     //delete matrix
     for(int i = 0;i<size;i++){
