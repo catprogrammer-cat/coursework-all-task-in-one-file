@@ -113,7 +113,7 @@ int main()
         }
     }
     
-    cout << "\nmax element: " << min;
+    cout << "\nmin element: " << min;
     cout << "\nindex max element: " << index;
     
     //delete matrix
