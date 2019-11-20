@@ -1,5 +1,7 @@
 
 #include <iostream>
+#include <stdlib.h>     
+#include <time.h>
 
 int max_value_matrix(int size){ //coursework_1_1 --> // Вычислить значение максимального 
     int max;                                       // элемента главной диагонали матрицы.
@@ -212,6 +214,6 @@ using namespace std;
 int main()
 {
     cout<<max_value_matrix(1000);
-
+    system("pause");
     return 0;
 }
