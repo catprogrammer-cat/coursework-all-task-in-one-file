@@ -2,6 +2,8 @@
 // параллельных побочной диагонали матрицы.
 
 #include <iostream>
+#include <stdlib.h>     
+#include <time.h>
 
 using namespace std;
 
@@ -121,5 +123,6 @@ int main()
     delete[] array2d;
     //delete array1d
     //delete [] array1d;
+    system("pause");
     return 0;
 }
