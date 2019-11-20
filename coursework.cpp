@@ -42,7 +42,7 @@ int max_value_matrix(int size){ //coursework_1_1 --> // Вычислить зн�
 
 int counter_positive_element_rows_array2d(int x,int y){ //coursework_1_2 --> // Вычислить элементы вектора как количества 
     int **array2d = new int * [y];                                                  // положительных элементов строк матрицы.
-    for(int i = 0;i<size;i++){
+    for(int i = 0;i<x;i++){
         array2d[i] = new int [x];
     }
     //create array
@@ -66,35 +66,36 @@ int counter_positive_element_rows_array2d(int x,int y){ //coursework_1_2 --> // 
         array1d[i] = quantity;
     }
     //delete matrix
-    for(int i = 0;i<size;i++){
+    for(int i = 0;i<x;i++){
         delete[] array2d[i];
     }
+
     delete[] array2d;
     //delete array1d
-    delete[] array1d;
-    return array1d;
+    // delete[] array1d;
+    return *array1d;
 }
 
-int sum_positive_elements_column_array2d(int x,int y){ //coursework_1_3 --> // Определить: сумму элементов в тех столбцах, 
+int sum_positive_elements_column_array2d(int size_x,int size_y){ //coursework_1_3 --> // Определить: сумму элементов в тех столбцах, 
     //create matrix                                                       // которые не содержат отрицательных элементов;
-    int **array2d = new int * [y];
-    for(int i = 0;i<y;i++){
-        array2d[i] = new int [x];
+    int **array2d = new int * [size_y];
+    for(int i = 0;i<size_x;i++){
+        array2d[i] = new int [size_x];
     }
     //create array
-    int *array1d = new int[x]; 
+    int *array1d = new int[size_x]; 
     // fill matrix
     srand ( time(0) );
-    for(int i = 0; i<y;i++){
-        for(int j = 0;j<x;j++){
+    for(int i = 0; i<size_y;i++){
+        for(int j = 0;j<size_x;j++){
             array2d[i][j] = (rand() % 20)-10;
         }
     } 
     // Calculate sum of positive element which constist
     // in collumn without negative element array2d
-    for(int i=0;i<x;i++){
+    for(int i=0;i<size_x;i++){
         array1d[i] = 0;
-        for(int j=0;j<y;j++){       
+        for(int j=0;j<size_y;j++){       
             if(array2d[j][i] < 0){
                 array1d[i] = 0;
                 break;
@@ -105,13 +106,13 @@ int sum_positive_elements_column_array2d(int x,int y){ //coursework_1_3 --> // �
         }
     }
     //delete matrix
-    for(int i = 0;i<y;i++){
+    for(int i = 0;i<size_y;i++){
         delete[] array2d[i];
     }
     delete[] array2d;
     //delete array1d
-    delete[] array1d;
-    return array1d;
+    // delete[] array1d;
+    return *array1d;
 }
 
 int find_max_element_of_diagonals_array2d(int size){ //coursework_1_4 --> // Найти минимум среди сумм модулей элементов диагоналей,
@@ -175,7 +176,7 @@ int find_max_element_of_diagonals_array2d(int size){ //coursework_1_4 --> // Н�
 }
 
     
-int* transfer_array2d_array1d(int size_x,int size_y){ // coursework_2_1 --> // Создать одномерный массив из элементов матрицы.
+int transfer_array2d_array1d(int size_x,int size_y){ // coursework_2_1 --> // Создать одномерный массив из элементов матрицы.
     //create matrix                                   // v_1
     int **array2d = new int * [size_y];
     for(int i = 0;i<size_x;i++){
@@ -202,7 +203,7 @@ int* transfer_array2d_array1d(int size_x,int size_y){ // coursework_2_1 --> // �
     delete[] array2d;
     // //delete array1d
     // delete[] array1d;
-    return array1d;
+    return *array1d;
 }
 
 
@@ -212,8 +213,8 @@ int* transfer_array2d_array1d(int size_x,int size_y){ // coursework_2_1 --> // �
 using namespace std;
 
 int main()
-{
-    cout<<max_value_matrix(1000);
+{   
+    
     system("pause");
     return 0;
 }
