@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
     int size = 2;
-    int max;
+    
     //create matrix
     int **array2d = new int * [size];
     for(int i = 0;i<size;i++){
