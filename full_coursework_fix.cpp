@@ -172,6 +172,39 @@ void transfer_array2d_array1d(int ** array2d,int size_x,int size_y){ // coursewo
     
 }
 
+// Создать новую матрицу из тех столбцов заданной матрицы, не
+// содержат элементы из диапазона (10, 20].
+
+// int create_array2d_not_range(int ** array2d, int size_x,int size_y){
+//     //create matrix
+//     int new_size_x = size_x;
+//     int new_size_y = size_y;
+//     for(int i = 0; i < size_y; i++){
+//         for(int i = 0; i < size_x; i++){
+//             if(array2d[i][j] > 10 && array2d[i][j] <= 20){
+//                 new_size_x--;
+//             }
+//         }
+//     }
+//     //create matrix
+//     int **array2d_new = new int * [new_size_y];
+//     for(int i = 0;i<new_size_x;i++){
+//         array2d_new[i] = new int [new_size_x];
+//     }
+
+//     for(int i = 0; i < size_y; i++){
+//         for(int i = 0; i < size_x; i++){
+//             array2d_new[][];
+//             if(array2d[i][j] > 10 && array2d[i][j] <= 20){
+//                 new_size_x--;
+//             }
+//         }
+//     }
+    
+
+   
+// }
+
 
 
 
