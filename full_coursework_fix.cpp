@@ -153,34 +153,23 @@ void find_max_element_of_diagonals_array2d(int ** array2d,int size_x,int size_y)
 }
 
     
-int transfer_array2d_array1d(int size_x,int size_y){ // coursework_2_1 --> // Создать одномерный массив из элементов матрицы.
-    //create matrix                                   // v_1
-    int **array2d = new int * [size_y];
-    for(int i = 0;i<size_x;i++){
-        array2d[i] = new int [size_x];
-    }
+void transfer_array2d_array1d(int ** array2d,int size_x,int size_y){ // coursework_2_1 --> // Создать одномерный массив из элементов матрицы.
+   
     //create array
     int *array1d = new int[size_x*size_y]; 
-    // fill matrix
-    srand ( time(0) );
-    for(int i = 0; i<size_x;i++){
-        for(int j = 0;j<size_y;j++){
-            array2d[i][j] = (rand() % 100);
-        }
-    }
     // transfer 'array2d' to 'array1d'
     int index=0;
     for(int i=0;i<size_x;i++)
         for(int j=0;j<size_y; j++,index++)
             array1d[index] = array2d[i][j];
-    // delete matrix
-    for(int i = 0;i<size_x;i++){
-        delete[] array2d[i];
-    }
-    delete[] array2d;
-    // //delete array1d
-    // delete[] array1d;
-    return *array1d;
+    index=0;
+    for(int i=0;i<size_x;i++)
+        for(int j=0;j<size_y; j++,index++)
+            cout << "[" << array1d[index] << "]";
+    
+    //delete array1d
+    delete[] array1d;
+    
 }
 
 
@@ -236,10 +225,10 @@ int main()
     cout << "------------------------------------------" << endl;
     cout << "Coursework 1, task 2: \"Calculate vector elements as quantities positive elements of the rows of the matrix.\"" << endl;
     //double* vector_after = return_vector(array_2d,vector);
-    int* array1d_p_2 = counter_positive_element_rows_array2d(array2d,size_x,size_y);
+    int* array1d_p_1_2 = counter_positive_element_rows_array2d(array2d,size_x,size_y);
     cout << "Vector of quantities positive elements of the rows of the matrix : ";
     for(int i = 0;i < size_y; i++){
-        cout << "[" << array1d_p_2[i] << "]" ;
+        cout << "[" << array1d_p_1_2[i] << "]" ;
     }
     cout << endl; 
     cout << "------------------------------------------" << endl;
@@ -250,10 +239,10 @@ int main()
     ////////////////////////////////COURSEWORK 1_3////////////////////////////////////
     cout << "------------------------------------------" << endl;
     cout << "Coursework 1, task 3: \"determine: the sum of the elements in those columns that do not contain negative elements.\"" << endl;
-    int* array1d_p_3 = sum_positive_elements_column_array2d(array2d,size_x,size_y);
+    int* array1d_p_1_3 = sum_positive_elements_column_array2d(array2d,size_x,size_y);
     cout << "Vector of sum of the elements of the columns of the matrix that do not contain negative elements : ";
     for(int i = 0;i < size_x; i++){
-        cout << "[" << array1d_p_3[i] << "]" ;
+        cout << "[" << array1d_p_1_3[i] << "]" ;
     }
     cout << endl; 
     cout << "------------------------------------------" << endl;
@@ -265,6 +254,13 @@ int main()
     
     cout << "Vector of sum of the side diagonal of the matrix: ";
     find_max_element_of_diagonals_array2d(array2d,size_x,size_y);
+    cout << endl; 
+    cout << "------------------------------------------" << endl;
+
+    ////////////////////////////////COURSEWORK 2_1////////////////////////////////////
+    cout << "------------------------------------------" << endl;
+    cout << "Coursework 2, task 1: \"Create a one-dimensional array of matrix elements.\"" << endl;
+    transfer_array2d_array1d(array2d,size_x,size_y);
     cout << endl; 
     cout << "------------------------------------------" << endl;
 
@@ -280,8 +276,7 @@ int main()
     delete[] array2d;
 
     
+
+ system("pause");
     return 0;
-    
-    system("pause");
-    
 }
