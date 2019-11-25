@@ -1,6 +1,14 @@
 #include <iostream>
 #include <stdlib.h>     
 #include <time.h>
+
+#include <stdio.h> // for gets, puts;
+#include <conio.h> // for getch();
+#include <string.h> // for strlen (s); necessary in online compiler
+
+#include <cctype>
+
+//#include <cctype>
 using namespace std;
 
 int max_value_matrix(int ** array2d,int size_x,int size_y){ //coursework_1_1 --> // Вычислить значение максимального 
@@ -205,7 +213,52 @@ void transfer_array2d_array1d(int ** array2d,int size_x,int size_y){ // coursewo
    
 // }
 
+void determine_x_in_string(char string[]){
+    
+    int i, len, quantity=0;
+    bool check;
+    len=strlen(string); //Length of the string
+    
+    for (i=0; i<len; i++){
+        if(string[i] ==  'x'){
+            check = true;
+            printf("This string has x\n");
+            break;
+        }
+        else if(string[i] == 'X'){
+            check = true;
+            printf("This string has X\n");
+            break;
 
+        }else{
+            check = false;            
+        }
+
+    }
+    if(check == false){
+        printf("This string hasn't x/X\n");         
+    }
+}
+
+
+
+void check_coincidence_numbers(char string_1[], char string_2[]){
+    int len_1, len_2, quantity=0;
+    len_1 = strlen(string_1); //Length of the string
+    len_2 = strlen(string_2);
+    int counter = 0;
+    int i=0;
+    int j=0;
+    for(;i<len_1;i++){
+        for(;j<len_2;j++){
+            if(string_1[i] == string_2[j] && isdigit(string_1[i]) && isdigit(string_2[i])){
+                counter++;
+                break;
+            }
+        }
+    }
+    cout << counter << endl;
+}
 
 
 
@@ -295,6 +348,26 @@ int main()
     cout << "Coursework 2, task 1: \"Create a one-dimensional array of matrix elements.\"" << endl;
     transfer_array2d_array1d(array2d,size_x,size_y);
     cout << endl; 
+    cout << "------------------------------------------" << endl;
+
+    // char string_1[200] = "Hello, my name is xxxtentacion. I play in dota2 and warcraft3";
+    char string_1[200] = "2";
+    char string_2[200] = "2222";
+    ////////////////////////////////COURSEWORK 3_1////////////////////////////////////
+    cout << "------------------------------------------" << endl;
+    cout << "Coursework 3, task 1: \"Determine if the string contains the letter X (small or large).\"" << endl;
+    puts(string_1);
+    determine_x_in_string(string_1); 
+    cout << endl;
+    cout << "------------------------------------------" << endl;
+    
+    ////////////////////////////////COURSEWORK 3_2////////////////////////////////////
+    cout << "------------------------------------------" << endl;
+    cout << "Coursework 3, task 2: \"Print the number of digits from line S2 that occur in line S1.\"" << endl;
+    puts(string_1);
+    puts(string_2);
+    check_coincidence_numbers(string_1, string_2);
+    cout << endl;
     cout << "------------------------------------------" << endl;
 
 
