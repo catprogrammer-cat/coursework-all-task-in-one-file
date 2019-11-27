@@ -11,6 +11,10 @@
 //#include <cctype>
 using namespace std;
 
+/////////////////////////////////////////////////////////////////////////
+///////////////////////////// File function////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
 void print_file(char* name){
     char s[100];
     FILE* f;
@@ -33,6 +37,89 @@ void print_file(char* name){
     }
     fclose(f);
 }
+
+void calculate_size_array2d(char* name, int &size_x, int &size_y){
+    FILE* f;
+    char s[100], *t; // t --> tabulation
+    f = fopen(name, "rt"); //открыть файл для чтения как текстовый
+    if (f == NULL){
+        cout << "Cannot open file to veiw\n";
+    }
+
+    int i, j;
+    // counter size of array2d from FILES
+    for(i=0; fgets(s, 100, f); i++){ // Считывать из файла строки, пока они не закончатся
+        j=0;
+        t = strtok(s, " \t");
+        for(;t != NULL; j++){
+            // array2d[i][j] = atoi(t);
+            t = strtok(NULL, " \t");
+        }
+    }
+    int x, y;
+    size_x = j;
+    size_y = i;
+
+    fclose(f);
+}
+
+
+int** read_and_push_array2d_return(char* name){
+    
+    FILE* f;
+    char s[100], *t; // t --> tabulation
+    f = fopen(name, "rt"); //открыть файл для чтения как текстовый
+    if (f == NULL){
+        return 0;
+    }
+
+    int i, j;
+    // counter size of array2d from FILES
+    for(i=0; fgets(s, 100, f); i++){ // Считывать из файла строки, пока они не закончатся
+        j=0;
+        t = strtok(s, " \t");
+        for(;t != NULL; j++){
+            // array2d[i][j] = atoi(t);
+            t = strtok(NULL, " \t");
+        }
+    }
+    int x, y;
+    x = j;
+    y = i;
+
+    // create array using size
+    //create matrix
+    int **array2d = new int * [y];
+    for(int i = 0;i<x;i++){
+        array2d[i] = new int [x];
+    }
+    fclose(f);
+    f = fopen(name, "rt"); //открыть файл для чтения как текстовый
+    if (f == NULL){
+       return 0;
+    }
+    // push values into array2d form FILES
+    for(i=0; fgets(s, 100, f); i++){ // Считывать из файла строки, пока они не закончатся
+        j=0;
+        t = strtok(s, " \t");
+        
+        for(;t != NULL; j++){
+            array2d[i][j] = atoi(t);
+            t = strtok(NULL, " \t");
+        }
+    }
+    fclose(f);
+    return array2d;
+
+}
+
+
+
+
+/////////////////////////////////////////////////////////////////////////
+///////////////////////////// Coursework_1////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
 
 int max_value_matrix(int ** array2d,int size_x,int size_y){ //coursework_1_1 --> // Вычислить значение максимального 
                                                             // элемента главной диагонали матрицы.
@@ -183,7 +270,9 @@ void find_max_element_of_diagonals_array2d(int ** array2d,int size_x,int size_y)
     
 }
 
-    
+    /////////////////////////////////////////////////////////////////////////
+    ///////////////////////////// Coursework_2////////////////////////////
+    /////////////////////////////////////////////////////////////////////////
 void transfer_array2d_array1d(int ** array2d,int size_x,int size_y){ // coursework_2_1 --> // Создать одномерный массив из элементов матрицы.
    
     //create array
@@ -236,6 +325,9 @@ void transfer_array2d_array1d(int ** array2d,int size_x,int size_y){ // coursewo
    
 // }
 
+    /////////////////////////////////////////////////////////////////////////
+    ///////////////////////////// Coursework_3////////////////////////////
+    /////////////////////////////////////////////////////////////////////////
 void determine_x_in_string(char string[]){
     
     int i, len, quantity=0;
@@ -303,20 +395,19 @@ int main()
 
 
     // declare size of matrix
-    int size_x = 6;
-    int size_y = 6;
-    //create matrix
-    int **array2d = new int * [size_y];
-    for(int i = 0;i<size_x;i++){
-        array2d[i] = new int [size_x];
-    }
-    // fill matrix
-    srand ( time(0) );
-    for(int i = 0; i<size_y;i++){
-        for(int j = 0;j<size_x;j++){
-            array2d[i][j] = (rand() % 20) - 10;
-        }
-    }
+    int size_x;
+    int size_y;
+
+    // Calculate size_x and size_y (size of array2d in file)
+    // We can use size_x and size_y as varible which have size of array2d
+    calculate_size_array2d(name_1, size_x,size_y);
+    // Output sizes x and y of array2d
+    cout << "size_x = " << size_x << endl;
+    cout << "size_y = " << size_y << endl;
+    // Create matrix
+    int **array2d;
+    array2d = read_and_push_array2d_return(name_1);
+   
     // output matrix 
     for(int i = 0; i<size_y;i++){
         cout << i << ":\t";
