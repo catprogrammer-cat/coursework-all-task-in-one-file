@@ -342,8 +342,9 @@ void transfer_array2d_array1d(int ** array2d,int size_x,int size_y, FILE *f3,int
     /////////////////////////////////////////////////////////////////////////
     ///////////////////////////// Coursework_3////////////////////////////
     /////////////////////////////////////////////////////////////////////////
-void determine_x_in_string(char name_2[],FILE *f3){
+void determine_x_in_string(char name_2[],FILE *f3,bool flag){
     
+
     FILE* f2;
     f2 = fopen(name_2, "rt"); //открыть файл для создания как текстовый
     
@@ -359,43 +360,47 @@ void determine_x_in_string(char name_2[],FILE *f3){
     int i, quantity=0;
     // bool check;
     int len; //=strlen(s); //Length of the string
-    cout << "hello world";
+    // cout << "hello world";
     while(fgets(s, 200, f2)){
         fgets(s, 200, f2);
         len = strlen(s);
         
         for (i=0; i<len; i++){
             if(s[i] ==  'x'){
-                
-                cout << s;
-                cout << "    ++This string has x";
-                cout << endl;
-
-                fprintf(f3, "%s", s);
-                fputs("    ++This string has x", f3);
-                fputs("\n",f3);
+                if(flag == 0){
+                    cout << s;
+                    cout << "    ++This string has x";
+                    cout << endl;
+                }else{
+                    fprintf(f3, "%s", s);
+                    fputs("    ++This string has x", f3);
+                    fputs("\n",f3);
+                }
                 break;           
                 
             }
             else if(s[i] == 'X'){
-                
-                cout << s;
-                cout << "    ++This string has X";
-                cout << endl;
-
-                fprintf(f3, "%s", s);
-                fputs("    ++This string has X", f3);
-                fputs("\n",f3);   
+                if(flag == 0){
+                    cout << s;
+                    cout << "    ++This string has X";
+                    cout << endl;
+                }else{
+                    fprintf(f3, "%s", s);
+                    fputs("    ++This string has X", f3);
+                    fputs("\n",f3);  
+                }
                 break;   
 
             }else{
-                cout << s;
-                cout << "    --This string hasn't x/X";
-                cout << endl;
-
-                fprintf(f3, "%s", s);
-                fputs("    --This string hasn't x/X", f3);
-                fputs("\n",f3); 
+                if(flag == 0){
+                    cout << s;
+                    cout << "    --This string hasn't x/X";
+                    cout << endl;
+                }else{
+                    fprintf(f3, "%s", s);
+                    fputs("    --This string hasn't x/X", f3);
+                    fputs("\n",f3); 
+                }
                 break;
             }
         }
