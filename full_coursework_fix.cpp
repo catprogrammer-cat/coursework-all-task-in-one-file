@@ -1,20 +1,16 @@
 #include <iostream>
 #include <stdlib.h>     
 #include <time.h>
-
 #include <stdio.h> // for gets, puts;
 #include <conio.h> // for getch();
 #include <string.h> // for strlen (s); necessary in online compiler
-
 #include <cctype>
 
-//#include <cctype>
 using namespace std;
 
 /////////////////////////////////////////////////////////////////////////
 ///////////////////////////// File function////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-
 void print_file(char* name){
     char s[100];
     FILE* f;
@@ -22,7 +18,7 @@ void print_file(char* name){
     if(f==NULL){
         cout<<"Cannot open file to veiw\n"; return;
     }
-    
+
     cout << "\nView file" << endl;
     while (fgets(s, 100, f)){ //считывать из файла строки, пока они не закончатся (пока
 
@@ -201,12 +197,17 @@ int* sum_positive_elements_column_array2d(int ** array2d,int size_x,int size_y){
     return array1d;
 }
 
-void find_max_element_of_diagonals_array2d(int ** array2d,int size_x,int size_y){ //coursework_1_4 --> // Найти минимум среди сумм модулей элементов диагоналей,
+void find_max_element_of_diagonals_array2d(int ** array2d,int size_x,int size_y,FILE *f3,char* file_name){ //coursework_1_4 --> // Найти минимум среди сумм модулей элементов диагоналей,
     //create matrix                                                       // параллельных побочной диагонали матрицы.
     //create array
-    using namespace std;
+    // using namespace std;
+
+    
+    // fclose(f3);
+
     if(size_x != size_y){
         cout << "0";
+        fputs("0",f3);
     }else{
     int size = size_x; 
     // fill array1d of sum of diagonals
@@ -259,21 +260,26 @@ void find_max_element_of_diagonals_array2d(int ** array2d,int size_x,int size_y)
     // output vector(array1d)
     for(int i = 0; i < quantity_a + quantity_b; i++) {
         cout << "[" << array1d[i] << "]";
+        fputs("[",f3); fprintf(f3, "%d", array1d[i]); fputs("]",f3);  
+        
     }
     cout << endl;
+    fputs("\n",f3);
     cout << "Min element : " << min << endl;
-    cout << "Index of min element : " << index; 
+    fputs("Min element : ",f3); fprintf(f3, "%d", min); fputs("\n",f3);
+    cout << "Index of min element : " << index << endl;
+    fputs("Index of min element : ",f3); fprintf(f3, "%d", index); 
    
     // delete array1d;
     delete [] array1d;
     }
-    
+    //fclose(f3);
 }
 
     /////////////////////////////////////////////////////////////////////////
     ///////////////////////////// Coursework_2////////////////////////////
     /////////////////////////////////////////////////////////////////////////
-void transfer_array2d_array1d(int ** array2d,int size_x,int size_y){ // coursework_2_1 --> // Создать одномерный массив из элементов матрицы.
+void transfer_array2d_array1d(int ** array2d,int size_x,int size_y, FILE *f3,int flag){ // coursework_2_1 --> // Создать одномерный массив из элементов матрицы.
    
     //create array
     int *array1d = new int[size_x*size_y]; 
@@ -283,9 +289,17 @@ void transfer_array2d_array1d(int ** array2d,int size_x,int size_y){ // coursewo
         for(int j=0;j<size_y; j++,index++)
             array1d[index] = array2d[i][j];
     index=0;
-    for(int i=0;i<size_x;i++)
-        for(int j=0;j<size_y; j++,index++)
-            cout << "[" << array1d[index] << "]";
+    for(int i=0;i<size_x;i++){
+        for(int j=0;j<size_y; j++,index++){
+            if(flag == 0){
+                cout << "[" << array1d[index] << "]";
+            }else{
+                fputs("[", f3); fprintf(f3, "%d", array1d[index]); fputs("]", f3);
+            }
+        }        
+    }
+
+            
     
     //delete array1d
     delete[] array1d;
@@ -328,52 +342,141 @@ void transfer_array2d_array1d(int ** array2d,int size_x,int size_y){ // coursewo
     /////////////////////////////////////////////////////////////////////////
     ///////////////////////////// Coursework_3////////////////////////////
     /////////////////////////////////////////////////////////////////////////
-void determine_x_in_string(char string[]){
+void determine_x_in_string(char name_2[],FILE *f3){
     
-    int i, len, quantity=0;
-    bool check;
-    len=strlen(string); //Length of the string
+    FILE* f2;
+    f2 = fopen(name_2, "rt"); //открыть файл для создания как текстовый
     
-    for (i=0; i<len; i++){
-        if(string[i] ==  'x'){
-            check = true;
-            printf("This string has x\n");
-            break;
-        }
-        else if(string[i] == 'X'){
-            check = true;
-            printf("This string has X\n");
-            break;
+    char s[200];
+    // int i = 0, j;
+    // cout << "nFirst words of all lines:\n";
+    // fputs("\n3.1. First words of all lines:\n", f3);
+    // while (fgets(s, 100, f3)) {
+    //    fgets(s,100,f3);
+    //    cout << s;
+    // }
 
-        }else{
-            check = false;            
-        }
+    int i, quantity=0;
+    // bool check;
+    int len; //=strlen(s); //Length of the string
+    cout << "hello world";
+    while(fgets(s, 200, f2)){
+        fgets(s, 200, f2);
+        len = strlen(s);
+        
+        for (i=0; i<len; i++){
+            if(s[i] ==  'x'){
+                
+                cout << s;
+                cout << "    ++This string has x";
+                cout << endl;
 
-    }
-    if(check == false){
-        printf("This string hasn't x/X\n");         
-    }
-}
+                fprintf(f3, "%s", s);
+                fputs("    ++This string has x", f3);
+                fputs("\n",f3);
+                break;           
+                
+            }
+            else if(s[i] == 'X'){
+                
+                cout << s;
+                cout << "    ++This string has X";
+                cout << endl;
 
+                fprintf(f3, "%s", s);
+                fputs("    ++This string has X", f3);
+                fputs("\n",f3);   
+                break;   
 
+            }else{
+                cout << s;
+                cout << "    --This string hasn't x/X";
+                cout << endl;
 
-void check_coincidence_numbers(char string_1[], char string_2[]){
-    int len_1, len_2, quantity=0;
-    len_1 = strlen(string_1); //Length of the string
-    len_2 = strlen(string_2);
-    int counter = 0;
-    int i=0;
-    int j=0;
-    for(;i<len_1;i++){
-        for(;j<len_2;j++){
-            if(string_1[i] == string_2[j] && isdigit(string_1[i]) && isdigit(string_2[i])){
-                counter++;
+                fprintf(f3, "%s", s);
+                fputs("    --This string hasn't x/X", f3);
+                fputs("\n",f3); 
                 break;
             }
         }
+           
     }
-    cout << counter << endl;
+    fclose(f2);
+    
+
 }
+
+
+
+void check_coincidence_numbers(char name_2[], FILE *f3){
+
+    FILE* f2;
+    f2 = fopen(name_2, "rt"); //открыть файл для создания как текстовый
+
+    char string_1[200];
+    char string_2[200];
+    
+    int quantity = 0;
+
+    int counter = 0;
+    int len_1, len_2;
+
+    len_1 = strlen(string_1); //Length of the string
+    len_2 = strlen(string_2);
+
+    while(fgets(string_1, 200, f2)){
+        quantity++;
+    }
+    for(int ii = 0;ii < quantity;ii++){
+        if(ii%2 == 0){
+            fgets(string_1, 200, f2);
+            len_1 = strlen(string_1); //Length of the string
+            ii++;
+        }if(ii%2 != 0){
+            fgets(string_2, 200, f2);
+            len_2 = strlen(string_2);
+        }
+        for(int i=0; i<len_2;i++){
+            for(int j=0; j<len_1;j++){
+                if(string_2[i] == string_1[j] && isdigit(string_1[i]) && isdigit(string_2[i])){
+                    counter++;
+                    break;
+                }
+            }
+        }
+        for(int i=0;i<quantity;i++){
+            cout << "(" << string_1 << ")" << endl;
+            cout << "(" << string_2 << ")" << endl;
+            cout << "   counter = " <<  counter << endl;
+        }
+    }
+}
+
+
+// //Перше слово кожного рядка
+// void сруф (char* name2, FILE *f3)
+// {
+//     FILE* f2;
+//     char s[100], *t=new char[100];
+//     int i = 0, j; 
+//     f2 = fopen(name2, "rt"); //открыть файл для чтения как текстовый
+
+//     if (f2 == NULL) {
+//         cout << "Cannot open file to veiw\n";
+//         return;
+//     }
+//     cout << "\nFirst words of all lines:\n";
+//     fputs("\n3.1. First words of all lines:\n", f3);
+//     while (fgets(s, 100, f2)) { //считывать из файла строки, пока они не закончатся (пока
+//         t = strtok(s, " ,.;-^=:!?");
+//         puts(t);
+//         fprintf(f3, "%s\n", t);
+//     }
+//     fclose(f2);
+// }
+
+
+
 
 
 
@@ -384,30 +487,41 @@ int main()
     //////////////////////////////////////////////////////////////////////////////////
     //*****************************file operation***********************************//
     //////////////////////////////////////////////////////////////////////////////////
-    
-    char* name_1 = "F1.txt"; //имя файла на жёстком диске (в текущей папке проекта)
-    char* name_2 = "F2.txt"; //имя файла на жёстком диске (в текущей папке проекта)
+    char* name_1="F1.txt"; //имя файла на жёстком диске (в текущей папке проекта)
+    char* name_2="F2.txt";
+    char* name_3="F3.txt";
+    // Declare file f3 for result work program 
+    FILE* f3;
 
-    print_file(name_2);
+    f3 = fopen(name_3, "wt"); //create file to push a result of work programm
+    if (f3 == NULL) {
+        cout << "Cannot open file to view\n";
+        return 1;
+    }
+    print_file(name_2); // print file F2.txt
 
+    cout << endl << endl << endl; // separate information
 
-    cout << endl << endl << endl;
-
-
+    //////////////////////////////////////////////////////////////////////////////////
+    //*****************************Prepare array2d to work************************//
+    //////////////////////////////////////////////////////////////////////////////////
     // declare size of matrix
     int size_x;
     int size_y;
-
     // Calculate size_x and size_y (size of array2d in file)
     // We can use size_x and size_y as varible which have size of array2d
     calculate_size_array2d(name_1, size_x,size_y);
     // Output sizes x and y of array2d
-    cout << "size_x = " << size_x << endl;
-    cout << "size_y = " << size_y << endl;
+    cout << "Size_x = " << size_x << endl;
+    cout << "Size_y = " << size_y << endl;
+    // -------------------------------------------------------------------------------------------- //
+
+    
+    fputs("Size_y = ", f3); fprintf(f3, "%d", size_y); fputs("\n", f3);
+    fputs("\n", f3);
     // Create matrix
     int **array2d;
     array2d = read_and_push_array2d_return(name_1);
-   
     // output matrix 
     for(int i = 0; i<size_y;i++){
         cout << i << ":\t";
@@ -421,6 +535,24 @@ int main()
         }
         cout << ";" << endl;
     }
+    // -------------------------------------------------------------------------------------------- //
+    
+    for(int i = 0; i<size_y;i++){
+        fprintf(f3, "%d", i); fputs(":\t", f3); //cout << i << ":\t";  
+        for(int j = 0;j<size_x;j++){
+            if(array2d[i][j]>=0){
+                fputs("[ ", f3); fprintf(f3, "%d", array2d[i][j]); fputs("]", f3); //cout << "[ " << array2d[i][j]  << "]"; 
+            }else{
+                fputs("[", f3); fprintf(f3, "%d", array2d[i][j]); fputs("]", f3); //cout << "[" << array2d[i][j]  << "]";
+            }
+
+        }
+         fputs("\n", f3);
+    }
+
+    
+
+
     //////////////////////////////////////////////////////////////////////////////////
     //****************************************************************************//
     //////////////////////////////////////////////////////////////////////////////////
@@ -428,8 +560,17 @@ int main()
     ////////////////////////////////COURSEWORK 1_1////////////////////////////////////
     cout << "------------------------------------------" << endl;
     cout << "Coursework 1, task 1: \"Calculate the maximum value element of the main diagonal of the matrix.\"" << endl;
+
     cout << "Max value of main diagonal of matrix : " << max_value_matrix(array2d,size_x,size_y) << " <----- If width and height of matrix will not be equal , then return 0;(diagonal doesen't exist)"<< endl;
     cout << "------------------------------------------" << endl;
+    // -------------------------------------------------------------------------------------------- //
+    fputs("------------------------------------------\n", f3);
+    fputs("Coursework 1, task 1: \"Calculate the maximum value element of the main diagonal of the matrix.\"\n", f3);
+        fputs("Max value of main diagonal of matrix : ", f3);
+        fprintf(f3, "%d", max_value_matrix(array2d,size_x,size_y)); // yourCounter of type int in this case
+        fputs(" <----- If width and height of matrix will not be equal , then return 0;(diagonal doesen't exist)\n", f3);
+    fputs("------------------------------------------\n", f3);
+    
 
 
 
@@ -445,6 +586,20 @@ int main()
     }
     cout << endl; 
     cout << "------------------------------------------" << endl;
+    // -------------------------------------------------------------------------------------------- //
+    fputs("------------------------------------------\n", f3);
+    fputs("Coursework 1, task 2: \"Calculate vector elements as quantities positive elements of the rows of the matrix.\"\n", f3);
+    //int* array1d_p_1_2 = counter_positive_element_rows_array2d(array2d,size_x,size_y);
+        fputs("Vector of quantities positive elements of the rows of the matrix : ", f3);
+        for(int i = 0;i < size_y; i++){
+            fputs("[", f3); fprintf(f3, "%d", array1d_p_1_2[i]); fputs("]", f3);
+        }
+        fputs("\n", f3);
+    fputs("------------------------------------------\n", f3);
+
+
+
+
 
 
 
@@ -459,6 +614,21 @@ int main()
     }
     cout << endl; 
     cout << "------------------------------------------" << endl;
+    // -------------------------------------------------------------------------------------------- //
+    fputs("------------------------------------------\n", f3);
+    fputs("Coursework 1, task 3: \"determine: the sum of the elements in those columns that do not contain negative elements.\"\n", f3);
+    //int* array1d_p_1_3 = sum_positive_elements_column_array2d(array2d,size_x,size_y);
+    fputs("Vector of sum of the elements of the columns of the matrix that do not contain negative elements : ", f3);
+        for(int i = 0;i < size_y; i++){
+            fputs("[", f3); fprintf(f3, "%d", array1d_p_1_3[i]); fputs("]", f3);
+        }
+        fputs("\n", f3);
+    fputs("------------------------------------------\n", f3);
+
+
+
+
+
 
                                                                                                                                                
     ////////////////////////////////COURSEWORK 1_4////////////////////////////////////
@@ -466,34 +636,73 @@ int main()
     cout << "Coursework 1, task 4: \"Find the minimum among the sums of the modules of the elements of the diagonals parallel to the side diagonal of the matrix.\"" << endl;
     
     cout << "Vector of sum of the side diagonal of the matrix: ";
-    find_max_element_of_diagonals_array2d(array2d,size_x,size_y);
+    
     cout << endl; 
     cout << "------------------------------------------" << endl;
+    // -------------------------------------------------------------------------------------------- //
+    fputs("------------------------------------------\n", f3);//
+    fputs("Coursework 1, task 4: \"Find the minimum among the sums of the modules of the elements of the diagonals parallel to the side diagonal of the matrix.\"\n", f3);//
+        fputs("Vector of sum of the side diagonal of the matrix: ", f3);
+        //
+        find_max_element_of_diagonals_array2d(array2d,size_x,size_y,f3,name_3);
+        //
+        fputs("\n", f3);
+    fputs("------------------------------------------\n", f3);
+
+
 
     ////////////////////////////////COURSEWORK 2_1////////////////////////////////////
     cout << "------------------------------------------" << endl;
     cout << "Coursework 2, task 1: \"Create a one-dimensional array of matrix elements.\"" << endl;
-    transfer_array2d_array1d(array2d,size_x,size_y);
+    transfer_array2d_array1d(array2d,size_x,size_y,f3,0);
     cout << endl; 
     cout << "------------------------------------------" << endl;
+    // -------------------------------------------------------------------------------------------- //
+    fputs("------------------------------------------\n", f3);//
+    fputs("Coursework 2, task 1: \"Create a one-dimensional array of matrix elements.\"\n", f3);//
+        
+        //
+        transfer_array2d_array1d(array2d,size_x,size_y,f3,1);
+        //
+        fputs("\n", f3);
+    fputs("------------------------------------------\n", f3);
+
+
+
+
 
     // char string_1[200] = "Hello, my name is xxxtentacion. I play in dota2 and warcraft3";
-    char string_1[200] = "2";
-    char string_2[200] = "2222";
+    char string_1[100] = "22233333332";
+    char string_2[100] = "222232";
+    
+   
+    
     ////////////////////////////////COURSEWORK 3_1////////////////////////////////////
     cout << "------------------------------------------" << endl;
     cout << "Coursework 3, task 1: \"Determine if the string contains the letter X (small or large).\"" << endl;
     puts(string_1);
-    determine_x_in_string(string_1); 
+    determine_x_in_string(name_2, f3, 0);
+    // determine_x_in_string(string_1); 
     cout << endl;
     cout << "------------------------------------------" << endl;
-    
+    // -------------------------------------------------------------------------------------------- //
+    fputs("------------------------------------------\n", f3);//
+    fputs("Coursework 3, task 1: \"Determine if the string contains the letter X (small or large).\"\n", f3);//
+        
+        //
+        determine_x_in_string(name_2, f3, 1);
+        //
+    fputs("\n", f3);
+    fputs("------------------------------------------\n", f3);
+
+
     ////////////////////////////////COURSEWORK 3_2////////////////////////////////////
     cout << "------------------------------------------" << endl;
     cout << "Coursework 3, task 2: \"Print the number of digits from line S2 that occur in line S1.\"" << endl;
-    puts(string_1);
-    puts(string_2);
-    check_coincidence_numbers(string_1, string_2);
+    // puts(string_1);
+    // puts(string_2);
+    // check_coincidence_numbers(name_2, f3);
+    // check_coincidence_numbers(string_1, string_2);
     cout << endl;
     cout << "------------------------------------------" << endl;
 
