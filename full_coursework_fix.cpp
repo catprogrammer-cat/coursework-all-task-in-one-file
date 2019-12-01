@@ -513,8 +513,16 @@ void output_word_multiple_3_and_quantity(char name_2[], FILE *f3){
                         
                 len_word = strlen(t);
                 if(len_word%3 == 0){
+
                     cout << t;
-                    cout << " <-- " << len_word << endl;    
+                    cout << " <-- " << len_word << endl;
+
+                    fprintf(f3, "%s", t);
+                    fputs(" <-- ", f3);
+                    fprintf(f3, "%d", len_word);
+                    fputs("\n", f3);
+                    
+                    
                 }
                 
 			    t = strtok(NULL, " ");
