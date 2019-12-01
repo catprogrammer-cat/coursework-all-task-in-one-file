@@ -413,49 +413,49 @@ void determine_x_in_string(char name_2[],FILE *f3,bool flag){
 
 
 
-void check_coincidence_numbers(char name_2[], FILE *f3){
+// void check_coincidence_numbers(char name_2[], FILE *f3){
 
-    FILE* f2;
-    f2 = fopen(name_2, "rt"); //открыть файл для создания как текстовый
+//     FILE* f2;
+//     f2 = fopen(name_2, "rt"); //открыть файл для создания как текстовый
 
-    char string_1[200];
-    char string_2[200];
+//     char string_1[200];
+//     char string_2[200];
     
-    int quantity = 0;
+//     int quantity = 0;
 
-    int counter = 0;
-    int len_1, len_2;
+//     int counter = 0;
+//     int len_1, len_2;
 
-    len_1 = strlen(string_1); //Length of the string
-    len_2 = strlen(string_2);
+//     len_1 = strlen(string_1); //Length of the string
+//     len_2 = strlen(string_2);
 
-    while(fgets(string_1, 200, f2)){
-        quantity++;
-    }
-    for(int ii = 0;ii < quantity;ii++){
-        if(ii%2 == 0){
-            fgets(string_1, 200, f2);
-            len_1 = strlen(string_1); //Length of the string
-            ii++;
-        }if(ii%2 != 0){
-            fgets(string_2, 200, f2);
-            len_2 = strlen(string_2);
-        }
-        for(int i=0; i<len_2;i++){
-            for(int j=0; j<len_1;j++){
-                if(string_2[i] == string_1[j] && isdigit(string_1[i]) && isdigit(string_2[i])){
-                    counter++;
-                    break;
-                }
-            }
-        }
-        for(int i=0;i<quantity;i++){
-            cout << "(" << string_1 << ")" << endl;
-            cout << "(" << string_2 << ")" << endl;
-            cout << "   counter = " <<  counter << endl;
-        }
-    }
-}
+//     while(fgets(string_1, 200, f2)){
+//         quantity++;
+//     }
+//     for(int ii = 0;ii < quantity;ii++){
+//         if(ii%2 == 0){
+//             fgets(string_1, 200, f2);
+//             len_1 = strlen(string_1); //Length of the string
+//             ii++;
+//         }if(ii%2 != 0){
+//             fgets(string_2, 200, f2);
+//             len_2 = strlen(string_2);
+//         }
+//         for(int i=0; i<len_2;i++){
+//             for(int j=0; j<len_1;j++){
+//                 if(string_2[i] == string_1[j] && isdigit(string_1[i]) && isdigit(string_2[i])){
+//                     counter++;
+//                     break;
+//                 }
+//             }
+//         }
+//         for(int i=0;i<quantity;i++){
+//             cout << "(" << string_1 << ")" << endl;
+//             cout << "(" << string_2 << ")" << endl;
+//             cout << "   counter = " <<  counter << endl;
+//         }
+//     }
+// }
 
 
 // //Перше слово кожного рядка
@@ -481,6 +481,50 @@ void check_coincidence_numbers(char name_2[], FILE *f3){
 // }
 
 
+
+void output_word_multiple_3_and_quantity(char name_2[], FILE *f3){
+    
+    
+    FILE* f2;
+    f2 = fopen(name_2, "rt"); //открыть файл для создания как текстовый
+    char *t=new char[200];
+    char s[200];
+    
+    int len_word = 0;
+
+    // while(fgets(s, 200, f2)) {
+    //     t = strtok(s, " ,.;-^=:!?");
+    //     while (t != NULL){
+
+    //         t = strtok(NULL, " .,;?!-");   
+    //         cout << strlen(t) << endl;
+    //     }
+    // }
+    int counter_1 = 0;
+    int counter_2 = 0;
+    while (fgets(s, 100, f2))
+	{
+		t = strtok(s, " ");
+		while (t != NULL)
+		{
+			
+				// printf("%s\t", t);
+				// fprintf(f3, "%s\t", t);
+                        
+                len_word = strlen(t);
+                if(len_word%3 == 0){
+                    cout << t;
+                    cout << " <-- " << len_word << endl;    
+                }
+                
+			    t = strtok(NULL, " ");
+		}
+	}
+    
+
+  
+
+}
 
 
 
@@ -686,6 +730,7 @@ int main()
     cout << "------------------------------------------" << endl;
     cout << "Coursework 3, task 1: \"Determine if the string contains the letter X (small or large).\"" << endl;
     puts(string_1);
+    puts(string_2);
     determine_x_in_string(name_2, f3, 0);
     // determine_x_in_string(string_1); 
     cout << endl;
@@ -712,6 +757,8 @@ int main()
     cout << "------------------------------------------" << endl;
 
 
+
+    output_word_multiple_3_and_quantity(name_2, f3);
     //////////////////////////////////////////////////////////////////////////////////
     //****************************************************************************//
     //////////////////////////////////////////////////////////////////////////////////
